@@ -1,0 +1,439 @@
+<!doctype html>
+<html ng-app="qingniwan.invite">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=0,maximum-scale=1,width=device-width"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <title>雷达找人</title>
+    <meta name="keywords" content="INVITE, 去邀请 去生活"/>
+    <meta name="description" content="INVITE 是一款以玩为主的 App. 可进行线上交流, 线下交友的移动应用. INVITE 提供丰富的线下生活方式场景, 便捷的邀约方法和即时通讯工具. 在这里用户可以找到有意思的人一起去做感兴趣的事儿."/>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="/qingniwan/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/qingniwan/plugins/animate.css/animate.min.css"/>
+
+    <!--swiper-->
+    <link href="//cdn.bootcss.com/Swiper/3.3.1/css/swiper.css" rel="stylesheet">
+
+    <!-- custom style -->
+    <link rel="stylesheet" type="text/css" href="/qingniwan/css/radar.css?timeStamp=20160817124400">
+
+    <script src="/qingniwan/js/global/autoAdjustRootEm.js"></script>
+</head>
+
+<body ng-controller="radarController" ng-cloak>
+<div id="J_maskLayer"></div>
+<form name="QA">
+    <div class="imgContainer">
+        <div class="radar"></div>
+        <div class="pointer"></div>
+
+        <!--图片列表-->
+        <div class="imgList" id="scanningImagesList">
+
+            <div class="thePeopleOfScanContent">
+                <img id="OneSelf" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{thePeopleOfScanning.img}}" class="thePeopleOfScanImg">
+                <span class="thePeopleOfScanAnswer">{{thePeopleOfScanning.answer}}</span>
+            </div>
+            <div id="div_0" class="cellContent" ng-click="openScanningImageDetails($event,final[0])">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{final[0].img}}" class="cell">
+
+                <div class="distanceGroup">
+                    <img class="distanceIcon" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{final[0].isWxOrInviteIcon}}">
+
+                    <p class="distanceTextStyle">{{final[0].distanceText}}</p>
+                </div>
+                <span class="text-center ImgListUserText">{{final[0].answer}}</span>
+            </div>
+            <div id="div_1" class="cellContent" ng-click="openScanningImageDetails($event,final[1])">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{final[1].img}}" class="cell">
+
+                <div class="distanceGroup">
+                    <img class="distanceIcon" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{final[1].isWxOrInviteIcon}}">
+
+                    <p class="distanceTextStyle">{{final[1].distanceText}}</p>
+                </div>
+                <span class="text-center ImgListUserText">{{final[1].answer}}</span>
+            </div>
+            <div id="div_2" class="cellContent" ng-click="openScanningImageDetails($event,final[2])">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{final[2].img}}" class="cell">
+
+                <div class="distanceGroup">
+                    <img class="distanceIcon" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{final[2].isWxOrInviteIcon}}">
+
+                    <p class="distanceTextStyle">{{final[2].distanceText}}</p>
+                </div>
+                <span class="text-center ImgListUserText">{{final[2].answer}}</span>
+            </div>
+            <div id="div_3" class="cellContent" ng-click="openScanningImageDetails($event,final[3])">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{final[3].img}}" class="cell">
+
+                <div class="distanceGroup">
+                    <img class="distanceIcon" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{final[3].isWxOrInviteIcon}}">
+
+                    <p class="distanceTextStyle">{{final[3].distanceText}}</p>
+                </div>
+                <span class="text-center ImgListUserText">{{final[3].answer}}</span>
+            </div>
+            <div id="div_4" class="cellContent" ng-click="openScanningImageDetails($event,final[4])">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{final[4].img}}" class="cell">
+
+                <div class="distanceGroup">
+                    <img class="distanceIcon" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{final[4].isWxOrInviteIcon}}">
+
+                    <p class="distanceTextStyle">{{final[4].distanceText}}</p>
+                </div>
+                <span class="text-center ImgListUserText">{{final[4].answer}}</span>
+            </div>
+            <div id="div_5" class="cellContent" ng-click="openScanningImageDetails($event,final[5])">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{final[5].img}}" class="cell">
+
+                <div class="distanceGroup">
+                    <img class="distanceIcon" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{final[5].isWxOrInviteIcon}}">
+
+                    <p class="distanceTextStyle">{{final[5].distanceText}}</p>
+                </div>
+                <span class="text-center ImgListUserText">{{final[5].answer}}</span>
+            </div>
+            <div id="div_6" class="cellContent" ng-click="openScanningImageDetails($event,final[6])">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{final[6].img}}" class="cell">
+
+                <div class="distanceGroup">
+                    <img class="distanceIcon" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{final[6].isWxOrInviteIcon}}">
+
+                    <p class="distanceTextStyle">{{final[6].distanceText}}</p>
+                </div>
+                <span class="text-center ImgListUserText">{{final[6].answer}}</span>
+            </div>
+            <div id="div_7" class="cellContent" ng-click="openScanningImageDetails($event,final[7])">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{final[7].img}}" class="cell">
+
+                <div class="distanceGroup">
+                    <img class="distanceIcon" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{final[7].isWxOrInviteIcon}}">
+
+                    <p class="distanceTextStyle">{{final[7].distanceText}}</p>
+                </div>
+                <span class="text-center ImgListUserText">{{final[7].answer}}</span>
+            </div>
+
+        </div>
+
+        <div class="swiper-container swiper-container-parentOfQuestionList" id="parentOfQuestionList">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide" ng-repeat="itemList in finalQuestionDataList.questionList track by $index" on-finish-render="repeatFinishcallBack">
+
+                    <!--radio默认样式(第一版)-->
+                    <!-- <ul class="questionOptions">
+                         <li  class="liItemStyle" ng-repeat="item in itemList track by $index">
+                             <label for="answerGroup-{{$parent.$index}}-{{$index}}" class="labelStyle">{{item.quesdec}}</label>
+                             <input type="radio" id="answerGroup-{{$parent.$index}}-{{$index}}" name="radioAnswer" class="radioStyle" value="{{item.quesdec}}">
+                         </li>
+                     </ul>
+
+                    <!--修改radio默认样式(第二版)-->
+                    <!-- class="questionTitle text-center"-->
+                    <h2 class="questionTitle">{{finalQuestionDataList.title}}</h2>
+                    <ul class="questionOptionsStyle" id="parentDataUl">
+                        <li ng-repeat="item in itemList track by $index" id="parentDataLi">
+                            <label for="{{item.quesdec}}-{{$parent.$index}}-{{$index}}">{{item.quesdec}}
+                                <span></span><input type="radio" id="{{item.quesdec}}-{{$parent.$index}}-{{$index}} " name="sport" value="{{item.quesdec}}"></label>
+                            <i class="SwitchToSon ifShowMoreBtnStyle" ng-click="SwitchToSonBtn(item)"><strong>
+                                    更多</strong><b class="glyphicon glyphicon-play"></b></i>
+
+                            <p style="display: none" id="ifShowMoreBtn">{{item.subClass}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="swiper-pagination swiper-pagination-parentOfQuestionList"></div>
+        </div>
+        <div class="swiper-container swiper-container-sonOfQuestionList" id="sonOfQuestionList">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" ng-repeat="sonItemList in finalOfSonQuestionDataList track by $index" on-finish-render="sonRepeatFinishcallBack">
+                    <h2 class="questionTitle">更多答案</h2>
+                    <a href="javascript:" class="questionPageBack" ng-click="SwitchBackToParentBtn()">
+                        <img class="imgBackStyle" src="/qingniwan/img/radar-back.png"></a>
+                    <ul class="questionOptionsStyle">
+                        <li ng-repeat="sonItem in sonItemList track by $index" id="sonDataLi">
+                            <label for="SON{{sonItem}}-{{$parent.$index}}-{{$index}}">{{sonItem}}
+                                <span></span><input type="radio" id="SON{{sonItem}}-{{$parent.$index}}-{{$index}} " name="sonOfSport" value="{{sonItem}}"></label>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="swiper-pagination swiper-pagination-sonOfQuestionList"></div>
+        </div>
+    </div>
+</form>
+
+<!-- 进入雷达前回答问题 -->
+<div class="customeBtnGroup1" id="J_AnswerQuestionForScan">
+    <p class="TheClues text-center">每次扫描为45分钟，之后自动关闭</p>
+    <a class="btn radarBtn1 button-itemFir" href="#" ng-click="AnswerQuestionForScanBtn($event)">进入雷达</a>
+</div>
+
+<!--加入INVITE社区 和 我也来扫一扫-->
+<div class="customeBtnGroup2" id="J_IComeToScan">
+    <a class="btn radarBtn2 button-itemFir" href="/qingniwan/download?do=download">加入
+        INVITE社区</a>
+    <a class="btn radarBtn2 button-itemSec" href="#" ng-click="IComeToScanBtn($event)">
+        我也来扫一扫</a>
+
+</div>
+
+<!--扫附近的人 和 扫微信好友-->
+<div class="customeBtnGroup2" id="J_ScanWeiXinFirend">
+    <a class="btn radarBtn2 button-itemFir" ng-click="ScanNearOrMoreBtn($event)">{{ScanNearOrMoreText}}</a>
+    <a class="btn radarBtn2 button-itemSec" href="#" ng-click="ScanWeiXinFirendBtn($event)">
+        扫微信好友</a>
+
+</div>
+
+<!--查看自己的扫描结果时 扫微信好友-->
+<div class="customeBtnGroup1" id="J_ViewTheResults">
+    <a class="btn radarBtn1 button-itemFir" href="#" ng-click="ScanWeiXinFirendBtn($event)">
+        扫微信好友</a>
+
+</div>
+
+<!-- 通过INVITE联系TA -->
+<div class="customeBtnGroup3" id="J_contactTAFromINVITE">
+    <a class="btn radarBtn3 button-itemFir" href="/qingniwan/download?do=download">通过INVITE联系TA</a>
+</div>
+
+<!-- 关闭INVITE详情弹窗 -->
+<div class="InvitePeopleDetailsModalCloseBtn" id="J_InvitePeopleDetailsModalCloseBtn">
+    <a class="btn CloseBtn button-itemFir" ng-click="InvitePeopleDetailsModalBtn()">x</a>
+</div>
+
+<!--扫描更多提示框-->
+<div class="modal" id="ScanMorePromptModal" role="dialog" aria-labelledby="ScanMorePromptModal" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="text-center secretaryStyle">
+                    扫描更多结果,与大家聊天互动最好还是下载INVITE吧
+                </p>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button type="button" class="btn  btn-block cancelStyle" ng-click="ScanMorePromptModalOfTomorrow()">
+                            明天下载
+                        </button>
+                    </div>
+                    <div class="col-xs-6">
+                        <button type="button" class="btn  btn-block" ng-click="ScanMorePromptModalOfImmediately()">
+                            立刻下载
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--扫描前回答问题弹窗-->
+<div class="modal" id="answerQuestionForScanPromptModal" role="dialog" aria-labelledby="answerQuestionForScanPromptModal" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="signUpStyle text-center validationByPhone">
+                    请先回答问题TA的问题
+                </p>
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-block cancelStyle" ng-click="answerQuestionForScanPromptModalBtn()">
+                    好的
+                </button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--提示分享给好友弹窗-->
+<div class="modal fade" id="shareWithFriendsForScanningModal" role="dialog" aria-labelledby="shareWithFriendsForScanningModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content text-center">
+            <img src="/qingniwan/img/radar-share.png" class="TipsToShare">
+        </div>
+    </div>
+</div>
+
+<!-- 扫描的INVITE好友详情弹窗 -->
+<div class="modal" id="ScanningInvitePeopleDetailsModal" role="dialog" aria-labelledby="ScanningInvitePeopleDetailsModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content text-center">
+            <div class="container-fluid">
+                <div class="head layout-mb20">
+                    <div class="layout-mb20 layout-mt35 imgContentStyle">
+                        <div class="img-head" style="background-image:url({{userInfor.userImg}})"></div>
+                        <img id="logo" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" ng-src="{{userInfor.rankImg}}" alt="">
+                    </div>
+
+                    <div class="row words">
+                        <div class="col-xs-offset-2 col-xs-8 text-center layout-mb20">
+                <span id="badge-genderIcon-BG">
+                            <i id="badge-genderIcon-ICON"></i>
+                            <span class="user-age ng-binding">{{userInfor.age}}</span>
+                        </span>
+                            <span class="title layout-pr10">{{userInfor.constellation}}</span>
+                            <span class="title layout-pr20">{{userInfor.level}}.{{userInfor.exp}}</span>
+
+                        </div>
+                        <div class="col-xs-offset-1 col-xs-10 text-center">
+                            <p class="signature">{{userInfor.signature}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="photos layout-mb30">
+                    <div class="row">
+                        <div class="col-xs-3 img-body" ng-repeat="itemShareInfo in userInfor.userImgs track by $index">
+                            <div class="photo" style="background-image:url({{itemShareInfo}})"></div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="info2">
+                    <p class="category">TA的资料</p>
+
+                    <div class="content">
+                        <dl class="clear" ng-show="userInfor.job">
+                            <dt class="name">行业</dt>
+                            <dd class="attribute">{{userInfor.job}}</dd>
+                        </dl>
+                        <dl class="clear" ng-show="userInfor.duties">
+                            <dt class="name">职务</dt>
+                            <dd class="attribute">{{userInfor.duties}}</dd>
+                        </dl>
+                        <dl class="clear" ng-show="userInfor.company">
+                            <dt class="name">公司</dt>
+                            <dd class="attribute">{{userInfor.company}}</dd>
+                        </dl>
+                        <dl class="clear" ng-show="userInfor.university">
+                            <dt class="name">学校</dt>
+                            <dd class="attribute">{{userInfor.university}}</dd>
+                        </dl>
+                        <dl class="clear" ng-show="userInfor.salary">
+                            <dt class="name">月薪</dt>
+                            <dd class="attribute">{{userInfor.salary}}</dd>
+                        </dl>
+                        <dl class="clear" ng-show="userInfor.userHeight">
+                            <dt class="name">身高</dt>
+                            <dd class="attribute">{{userInfor.userHeight}}cm</dd>
+                        </dl>
+                        <dl class="clear" ng-show="userInfor.hometown">
+                            <dt class="name">来自</dt>
+                            <dd class="attribute">{{userInfor.hometown}}</dd>
+                        </dl>
+                        <dl class="clear" ng-show="userInfor.interest">
+                            <dt class="name">爱好</dt>
+                            <dd class="attribute">{{userInfor.interest}}</dd>
+                        </dl>
+                        <dl class="IntroductionStyle" ng-show="userInfor.personalNote">
+                            <dt class="name">简介</dt>
+                            <dd class="attribute">
+                                {{userInfor.personalNote}}
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 扫描的微信好友详情弹窗 -->
+<div class="modal" id="ScanningWixinPeopleDetailsModal" role="dialog" aria-labelledby="ScanningWixinPeopleDetailsModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content text-center">
+            <div class="userImgDes">
+                <img id="J_HeadPortrait" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="ScanningImageDetailsImg">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="sexIcon" id="J_sexIcon">
+            </div>
+            <h2 id="J_userName" class="ScanningImageDetailsTitle"></h2>
+
+            <p id="J_answer"></p>
+        </div>
+    </div>
+</div>
+
+<!-- 导航 -->
+<script src="/qingniwan/js/jquery-1.11.1.min.js"></script>
+<script src="/qingniwan/js/angular.min.js"></script>
+<script src="/qingniwan/bootstrap/js/bootstrap.js"></script>
+<!--swiper-->
+<script src="//cdn.bootcss.com/Swiper/3.3.1/js/swiper.js"></script>
+<script src="//cdn.bootcss.com/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.4/hammer.min.js"></script>
+<script>
+    /*回答问题列表*/
+    $(document).ready(function () {
+        var swiperContent = new Swiper('.swiper-container-content', {
+            noSwiping: true,
+            noSwipingClass: 'stop-swiping',
+            prevButton: '.swiper-button-prev',
+            nextButton: '.swiper-button-next',
+            observer: true,//修改swiper自己或子元素时，自动初始化swiper
+            observeParents: true//修改swiper的父元素时，自动初始化swiper
+        });
+        var swiperParent = new Swiper('.swiper-container-parentOfQuestionList', {
+            pagination: '.swiper-pagination-parentOfQuestionList',
+            paginationClickable: true,
+            longSwipesRatio: 0.3,
+            touchRatio: 1,
+            observer: true,//修改swiper自己或子元素时，自动初始化swiper
+            observeParents: true//修改swiper的父元素时，自动初始化swiper
+        });
+        var swiperSon = new Swiper('.swiper-container-sonOfQuestionList', {
+            pagination: '.swiper-pagination-sonOfQuestionList',
+            paginationClickable: true,
+            longSwipesRatio: 0.3,
+            touchRatio: 1,
+            observer: true,//修改swiper自己或子元素时，自动初始化swiper
+            observeParents: true//修改swiper的父元素时，自动初始化swiper
+        });
+
+    })
+</script>
+
+<script>
+    // 创建活动页, 需要额外注入 富文本编辑器 插件 ng.ueditor
+    qingniwan = angular.module('qingniwan.invite', ['angularMoment']);
+    qingniwan.value('baseData', {
+        recOpenID: '<?=$recOpenID ?>',
+        sex: '<?=$sex ?>',
+        wxName: '<?=$name ?>',
+        wxImg: '<?=$img ?>'
+    });
+</script>
+
+<script src="/qingniwan/model/controllers/radarControllerTest.js?timeStamp=20161012142800"></script>
+<!-- Angular UI for Bootstrap -->
+<script src="/qingniwan/angular-ui-bootstrap/ui-bootstrap.min.js"></script>
+<script src="/qingniwan/angular-ui-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+<script src="/qingniwan/model/factroies/H5Factory.js"></script>
+<link rel="stylesheet" href="/qingniwan/plugins/aui-artDialog/css/ui-dialog.css"/>
+<script src="/qingniwan/plugins/aui-artDialog/dist/dialog-min.js"></script>
+<script src="/qingniwan/node_modules/moment/min/moment-with-locales.min.js"></script>
+<script src="/qingniwan/node_modules/angular-moment/angular-moment.min.js"></script>
+
+<!-- md5 - (utilFactory 依赖 md5) -->
+<script src="/qingniwan/plugins/md5/md5.min.js"></script>
+<!-- 微信分享 -->
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+</body>
+</html>
